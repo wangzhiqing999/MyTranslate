@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E9554D6A-4102-4458-8AB7-C9742454954F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyTranslate</RootNamespace>
+    <AssemblyName>MyTranslate.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceImpl\AutoReplaceService.cs" />
+    <Compile Include="ServiceImpl\BookServiceImpl.cs" />
+    <Compile Include="ServiceImpl\ChapterServiceImpl.cs" />
+    <Compile Include="ServiceImpl\CommonServiceImpl.cs" />
+    <Compile Include="ServiceImpl\LineServiceImpl.cs" />
+    <Compile Include="ServiceImpl\WebReaderServiceImpl.cs" />
+    <Compile Include="ServiceImpl\NameLineServiceImpl.cs" />
+    <Compile Include="Service\IAutoReplaceService.cs" />
+    <Compile Include="Service\IBookService.cs" />
+    <Compile Include="Service\IChapterService.cs" />
+    <Compile Include="Service\ICommonService.cs" />
+    <Compile Include="Service\ILineService.cs" />
+    <Compile Include="Service\IWebReaderService.cs" />
+    <Compile Include="Util\CommonModelCopyer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyFramework.DataAccess\MyFramework.DataAccess.csproj">
+      <Project>{59E2B453-B5D9-4669-9B43-6EB222A40384}</Project>
+      <Name>MyFramework.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyFramework.Service\MyFramework.Service.csproj">
+      <Project>{B04AA25D-DE3D-4430-AB68-DAE77E06A7E9}</Project>
+      <Name>MyFramework.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyTranslate.DataAccess\MyTranslate.DataAccess.csproj">
+      <Project>{CE9977FD-1190-4FAA-8D0D-14919188AAD9}</Project>
+      <Name>MyTranslate.DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
