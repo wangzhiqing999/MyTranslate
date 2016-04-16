@@ -243,5 +243,115 @@ namespace MyTranslate.App.UI
         }
 
 
+
+
+
+
+
+        #region  前往机翻页面.
+
+
+        /// <summary>
+        /// 取得 书与章节.
+        /// </summary>
+        /// <param name="book"></param>
+        /// <param name="chapter"></param>
+        /// <returns></returns>
+        private bool GetBookAndChapter(out string book, out string chapter)
+        {
+            book = null;
+            chapter = null;
+
+            if (this.cboBooks.SelectedIndex < 0)
+            {
+                MyMessage.Warn("书籍必须选择！");
+                this.cboBooks.Focus();
+                return false;
+            }
+
+            if (this.cboChapters.SelectedIndex < 0)
+            {
+                MyMessage.Warn("章节必须选择！");
+                this.cboBooks.Focus();
+                return false;
+            }
+
+
+
+            // 取得章节代码.
+            string chapterCode = this.cboChapters.SelectedValue as string;
+
+
+            // 拆分 n1576cu/005
+            string[] bookchapter = chapterCode.Split('/');
+
+            book = bookchapter[0];
+            chapter = bookchapter[1];
+
+            // 去除掉章节前面的 0
+            chapter = chapter.TrimStart('0');
+
+            return true;
+        }
+
+
+
+        /// <summary>
+        /// 前往 Excite 机翻页面。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnExcite_Click(object sender, EventArgs e)
+        {
+            string book, chapter;
+
+            if (!GetBookAndChapter(out book, out chapter))
+            {
+                // 检查失败.
+                return;
+            }
+
+
+
+
+            string url = string.Format(
+                "http://www.excite-webtl.jp/world/chinese/web/?wb_url=http%3A%2F%2Fncode.syosetu.com%2F{0}%2F{1}%2F&wb_lp=JACH&wb_dis=1&big5=no", 
+                book, chapter);
+
+
+            // 用系统默认浏览器打开.
+            System.Diagnostics.Process.Start(url);
+        }
+
+
+
+        /// <summary>
+        /// 前往 Baidu 机翻页面。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnBaidu_Click(object sender, EventArgs e)
+        {
+            string book, chapter;
+
+            if (!GetBookAndChapter(out book, out chapter))
+            {
+                // 检查失败.
+                return;
+            }
+
+
+            string url = string.Format(
+                "http://fanyi.baidu.com/transpage?query=http%3A%2F%2Fncode.syosetu.com%2F{0}%2F{1}%2F&from=auto&to=zh&source=url&render=1",
+                book, chapter);
+
+
+            // 用系统默认浏览器打开.
+            System.Diagnostics.Process.Start(url);
+        }
+
+
+        #endregion  前往机翻页面.
+
     }
 }

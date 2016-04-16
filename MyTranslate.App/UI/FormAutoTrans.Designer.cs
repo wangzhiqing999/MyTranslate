@@ -33,10 +33,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlFoot = new System.Windows.Forms.Panel();
+            this.lblCheckReault = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.txtSource = new System.Windows.Forms.TextBox();
             this.txtTrans = new System.Windows.Forms.TextBox();
-            this.lblCheckReault = new System.Windows.Forms.Label();
+            this.btnExcite = new System.Windows.Forms.Button();
+            this.btnBaidu = new System.Windows.Forms.Button();
             this.cboChapters = new MyTranslate.App.UI.ComboBoxChapters();
             this.cboBooks = new MyTranslate.App.UI.ComboBoxBooks();
             this.tlpMain.SuspendLayout();
@@ -97,16 +99,27 @@
             // pnlFoot
             // 
             this.tlpMain.SetColumnSpan(this.pnlFoot, 2);
+            this.pnlFoot.Controls.Add(this.btnBaidu);
+            this.pnlFoot.Controls.Add(this.btnExcite);
             this.pnlFoot.Controls.Add(this.lblCheckReault);
             this.pnlFoot.Controls.Add(this.btnStart);
             this.pnlFoot.Location = new System.Drawing.Point(3, 463);
             this.pnlFoot.Name = "pnlFoot";
-            this.pnlFoot.Size = new System.Drawing.Size(827, 44);
+            this.pnlFoot.Size = new System.Drawing.Size(912, 44);
             this.pnlFoot.TabIndex = 1;
+            // 
+            // lblCheckReault
+            // 
+            this.lblCheckReault.AutoSize = true;
+            this.lblCheckReault.Location = new System.Drawing.Point(18, 17);
+            this.lblCheckReault.Name = "lblCheckReault";
+            this.lblCheckReault.Size = new System.Drawing.Size(11, 12);
+            this.lblCheckReault.TabIndex = 1;
+            this.lblCheckReault.Text = "-";
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(681, 12);
+            this.btnStart.Location = new System.Drawing.Point(814, 12);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 0;
@@ -135,14 +148,25 @@
             this.txtTrans.Size = new System.Drawing.Size(464, 404);
             this.txtTrans.TabIndex = 3;
             // 
-            // lblCheckReault
+            // btnExcite
             // 
-            this.lblCheckReault.AutoSize = true;
-            this.lblCheckReault.Location = new System.Drawing.Point(18, 17);
-            this.lblCheckReault.Name = "lblCheckReault";
-            this.lblCheckReault.Size = new System.Drawing.Size(11, 12);
-            this.lblCheckReault.TabIndex = 1;
-            this.lblCheckReault.Text = "-";
+            this.btnExcite.Location = new System.Drawing.Point(545, 12);
+            this.btnExcite.Name = "btnExcite";
+            this.btnExcite.Size = new System.Drawing.Size(86, 23);
+            this.btnExcite.TabIndex = 2;
+            this.btnExcite.Text = "Excite机翻";
+            this.btnExcite.UseVisualStyleBackColor = true;
+            this.btnExcite.Click += new System.EventHandler(this.btnExcite_Click);
+            // 
+            // btnBaidu
+            // 
+            this.btnBaidu.Location = new System.Drawing.Point(649, 12);
+            this.btnBaidu.Name = "btnBaidu";
+            this.btnBaidu.Size = new System.Drawing.Size(75, 23);
+            this.btnBaidu.TabIndex = 3;
+            this.btnBaidu.Text = "Baidu 机翻";
+            this.btnBaidu.UseVisualStyleBackColor = true;
+            this.btnBaidu.Click += new System.EventHandler(this.btnBaidu_Click);
             // 
             // cboChapters
             // 
@@ -198,5 +222,7 @@
         private System.Windows.Forms.TextBox txtSource;
         private System.Windows.Forms.TextBox txtTrans;
         private System.Windows.Forms.Label lblCheckReault;
+        private System.Windows.Forms.Button btnExcite;
+        private System.Windows.Forms.Button btnBaidu;
     }
 }
