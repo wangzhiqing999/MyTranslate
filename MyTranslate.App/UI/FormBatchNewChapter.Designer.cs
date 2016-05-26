@@ -31,8 +31,18 @@
             this.components = new System.ComponentModel.Container();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.gvWebChapters = new System.Windows.Forms.DataGridView();
+            this.IsActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.chapterCodeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chapterNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chapterUrlDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chapterBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.gvChapters = new System.Windows.Forms.DataGridView();
+            this.chapterCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chapterNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chapterUrlDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bookCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isActiveDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.chapterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pnlFoot = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
@@ -44,16 +54,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.pbrChapter = new System.Windows.Forms.ProgressBar();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.chapterCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chapterNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chapterUrlDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bookCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isActiveDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.IsActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.chapterCodeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chapterNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chapterUrlDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.chkSelectAll = new System.Windows.Forms.CheckBox();
             this.tlpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvWebChapters)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chapterBindingSource1)).BeginInit();
@@ -61,6 +63,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chapterBindingSource)).BeginInit();
             this.pnlFoot.SuspendLayout();
             this.pnlHeader.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -73,15 +76,15 @@
             this.tlpMain.Controls.Add(this.pnlFoot, 0, 3);
             this.tlpMain.Controls.Add(this.pnlHeader, 0, 0);
             this.tlpMain.Controls.Add(this.label2, 0, 1);
-            this.tlpMain.Controls.Add(this.label3, 1, 1);
             this.tlpMain.Controls.Add(this.pbrChapter, 0, 4);
             this.tlpMain.Controls.Add(this.webBrowser1, 1, 4);
+            this.tlpMain.Controls.Add(this.panel1, 1, 1);
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMain.Location = new System.Drawing.Point(0, 0);
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 5;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -101,11 +104,38 @@
             this.chapterUrlDataGridViewTextBoxColumn1});
             this.gvWebChapters.DataSource = this.chapterBindingSource1;
             this.gvWebChapters.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gvWebChapters.Location = new System.Drawing.Point(454, 83);
+            this.gvWebChapters.Location = new System.Drawing.Point(454, 93);
             this.gvWebChapters.Name = "gvWebChapters";
             this.gvWebChapters.RowTemplate.Height = 23;
-            this.gvWebChapters.Size = new System.Drawing.Size(446, 384);
+            this.gvWebChapters.Size = new System.Drawing.Size(446, 374);
             this.gvWebChapters.TabIndex = 4;
+            // 
+            // IsActive
+            // 
+            this.IsActive.DataPropertyName = "IsActive";
+            this.IsActive.HeaderText = "选择";
+            this.IsActive.Name = "IsActive";
+            // 
+            // chapterCodeDataGridViewTextBoxColumn1
+            // 
+            this.chapterCodeDataGridViewTextBoxColumn1.DataPropertyName = "ChapterCode";
+            this.chapterCodeDataGridViewTextBoxColumn1.HeaderText = "章节代码";
+            this.chapterCodeDataGridViewTextBoxColumn1.Name = "chapterCodeDataGridViewTextBoxColumn1";
+            this.chapterCodeDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // chapterNameDataGridViewTextBoxColumn1
+            // 
+            this.chapterNameDataGridViewTextBoxColumn1.DataPropertyName = "ChapterName";
+            this.chapterNameDataGridViewTextBoxColumn1.HeaderText = "章节名称";
+            this.chapterNameDataGridViewTextBoxColumn1.Name = "chapterNameDataGridViewTextBoxColumn1";
+            this.chapterNameDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // chapterUrlDataGridViewTextBoxColumn1
+            // 
+            this.chapterUrlDataGridViewTextBoxColumn1.DataPropertyName = "ChapterUrl";
+            this.chapterUrlDataGridViewTextBoxColumn1.HeaderText = "网页地址";
+            this.chapterUrlDataGridViewTextBoxColumn1.Name = "chapterUrlDataGridViewTextBoxColumn1";
+            this.chapterUrlDataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // chapterBindingSource1
             // 
@@ -126,12 +156,56 @@
             this.isActiveDataGridViewCheckBoxColumn});
             this.gvChapters.DataSource = this.chapterBindingSource;
             this.gvChapters.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gvChapters.Location = new System.Drawing.Point(3, 83);
+            this.gvChapters.Location = new System.Drawing.Point(3, 93);
             this.gvChapters.Name = "gvChapters";
             this.gvChapters.ReadOnly = true;
             this.gvChapters.RowTemplate.Height = 23;
-            this.gvChapters.Size = new System.Drawing.Size(445, 384);
+            this.gvChapters.Size = new System.Drawing.Size(445, 374);
             this.gvChapters.TabIndex = 3;
+            // 
+            // chapterCodeDataGridViewTextBoxColumn
+            // 
+            this.chapterCodeDataGridViewTextBoxColumn.DataPropertyName = "ChapterCode";
+            this.chapterCodeDataGridViewTextBoxColumn.HeaderText = "章节代码";
+            this.chapterCodeDataGridViewTextBoxColumn.Name = "chapterCodeDataGridViewTextBoxColumn";
+            this.chapterCodeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // chapterNameDataGridViewTextBoxColumn
+            // 
+            this.chapterNameDataGridViewTextBoxColumn.DataPropertyName = "ChapterName";
+            this.chapterNameDataGridViewTextBoxColumn.HeaderText = "章节名称";
+            this.chapterNameDataGridViewTextBoxColumn.Name = "chapterNameDataGridViewTextBoxColumn";
+            this.chapterNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // chapterUrlDataGridViewTextBoxColumn
+            // 
+            this.chapterUrlDataGridViewTextBoxColumn.DataPropertyName = "ChapterUrl";
+            this.chapterUrlDataGridViewTextBoxColumn.HeaderText = "网页地址";
+            this.chapterUrlDataGridViewTextBoxColumn.Name = "chapterUrlDataGridViewTextBoxColumn";
+            this.chapterUrlDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // bookCodeDataGridViewTextBoxColumn
+            // 
+            this.bookCodeDataGridViewTextBoxColumn.DataPropertyName = "BookCode";
+            this.bookCodeDataGridViewTextBoxColumn.HeaderText = "BookCode";
+            this.bookCodeDataGridViewTextBoxColumn.Name = "bookCodeDataGridViewTextBoxColumn";
+            this.bookCodeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.bookCodeDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // statusDataGridViewTextBoxColumn
+            // 
+            this.statusDataGridViewTextBoxColumn.DataPropertyName = "Status";
+            this.statusDataGridViewTextBoxColumn.HeaderText = "状态";
+            this.statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
+            this.statusDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // isActiveDataGridViewCheckBoxColumn
+            // 
+            this.isActiveDataGridViewCheckBoxColumn.DataPropertyName = "IsActive";
+            this.isActiveDataGridViewCheckBoxColumn.HeaderText = "IsActive";
+            this.isActiveDataGridViewCheckBoxColumn.Name = "isActiveDataGridViewCheckBoxColumn";
+            this.isActiveDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.isActiveDataGridViewCheckBoxColumn.Visible = false;
             // 
             // chapterBindingSource
             // 
@@ -205,7 +279,7 @@
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Location = new System.Drawing.Point(3, 50);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(445, 30);
+            this.label2.Size = new System.Drawing.Size(445, 40);
             this.label2.TabIndex = 5;
             this.label2.Text = "本机";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -213,10 +287,9 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(454, 50);
+            this.label3.Location = new System.Drawing.Point(201, 11);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(446, 30);
+            this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 6;
             this.label3.Text = "网站";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -239,76 +312,26 @@
             this.webBrowser1.TabIndex = 8;
             this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             // 
-            // chapterCodeDataGridViewTextBoxColumn
+            // panel1
             // 
-            this.chapterCodeDataGridViewTextBoxColumn.DataPropertyName = "ChapterCode";
-            this.chapterCodeDataGridViewTextBoxColumn.HeaderText = "章节代码";
-            this.chapterCodeDataGridViewTextBoxColumn.Name = "chapterCodeDataGridViewTextBoxColumn";
-            this.chapterCodeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.panel1.Controls.Add(this.chkSelectAll);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(454, 53);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(371, 34);
+            this.panel1.TabIndex = 9;
             // 
-            // chapterNameDataGridViewTextBoxColumn
+            // chkSelectAll
             // 
-            this.chapterNameDataGridViewTextBoxColumn.DataPropertyName = "ChapterName";
-            this.chapterNameDataGridViewTextBoxColumn.HeaderText = "章节名称";
-            this.chapterNameDataGridViewTextBoxColumn.Name = "chapterNameDataGridViewTextBoxColumn";
-            this.chapterNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // chapterUrlDataGridViewTextBoxColumn
-            // 
-            this.chapterUrlDataGridViewTextBoxColumn.DataPropertyName = "ChapterUrl";
-            this.chapterUrlDataGridViewTextBoxColumn.HeaderText = "网页地址";
-            this.chapterUrlDataGridViewTextBoxColumn.Name = "chapterUrlDataGridViewTextBoxColumn";
-            this.chapterUrlDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // bookCodeDataGridViewTextBoxColumn
-            // 
-            this.bookCodeDataGridViewTextBoxColumn.DataPropertyName = "BookCode";
-            this.bookCodeDataGridViewTextBoxColumn.HeaderText = "BookCode";
-            this.bookCodeDataGridViewTextBoxColumn.Name = "bookCodeDataGridViewTextBoxColumn";
-            this.bookCodeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.bookCodeDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // statusDataGridViewTextBoxColumn
-            // 
-            this.statusDataGridViewTextBoxColumn.DataPropertyName = "Status";
-            this.statusDataGridViewTextBoxColumn.HeaderText = "状态";
-            this.statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
-            this.statusDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // isActiveDataGridViewCheckBoxColumn
-            // 
-            this.isActiveDataGridViewCheckBoxColumn.DataPropertyName = "IsActive";
-            this.isActiveDataGridViewCheckBoxColumn.HeaderText = "IsActive";
-            this.isActiveDataGridViewCheckBoxColumn.Name = "isActiveDataGridViewCheckBoxColumn";
-            this.isActiveDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.isActiveDataGridViewCheckBoxColumn.Visible = false;
-            // 
-            // IsActive
-            // 
-            this.IsActive.DataPropertyName = "IsActive";
-            this.IsActive.HeaderText = "选择";
-            this.IsActive.Name = "IsActive";
-            // 
-            // chapterCodeDataGridViewTextBoxColumn1
-            // 
-            this.chapterCodeDataGridViewTextBoxColumn1.DataPropertyName = "ChapterCode";
-            this.chapterCodeDataGridViewTextBoxColumn1.HeaderText = "章节代码";
-            this.chapterCodeDataGridViewTextBoxColumn1.Name = "chapterCodeDataGridViewTextBoxColumn1";
-            this.chapterCodeDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // chapterNameDataGridViewTextBoxColumn1
-            // 
-            this.chapterNameDataGridViewTextBoxColumn1.DataPropertyName = "ChapterName";
-            this.chapterNameDataGridViewTextBoxColumn1.HeaderText = "章节名称";
-            this.chapterNameDataGridViewTextBoxColumn1.Name = "chapterNameDataGridViewTextBoxColumn1";
-            this.chapterNameDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // chapterUrlDataGridViewTextBoxColumn1
-            // 
-            this.chapterUrlDataGridViewTextBoxColumn1.DataPropertyName = "ChapterUrl";
-            this.chapterUrlDataGridViewTextBoxColumn1.HeaderText = "网页地址";
-            this.chapterUrlDataGridViewTextBoxColumn1.Name = "chapterUrlDataGridViewTextBoxColumn1";
-            this.chapterUrlDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.chkSelectAll.AutoSize = true;
+            this.chkSelectAll.Location = new System.Drawing.Point(15, 10);
+            this.chkSelectAll.Name = "chkSelectAll";
+            this.chkSelectAll.Size = new System.Drawing.Size(48, 16);
+            this.chkSelectAll.TabIndex = 7;
+            this.chkSelectAll.Text = "全选";
+            this.chkSelectAll.UseVisualStyleBackColor = true;
+            this.chkSelectAll.CheckedChanged += new System.EventHandler(this.chkSelectAll_CheckedChanged);
             // 
             // FormBatchNewChapter
             // 
@@ -328,6 +351,8 @@
             this.pnlFoot.ResumeLayout(false);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -359,5 +384,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn chapterCodeDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn chapterNameDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn chapterUrlDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.CheckBox chkSelectAll;
     }
 }

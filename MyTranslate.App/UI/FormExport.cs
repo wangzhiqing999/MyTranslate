@@ -10,10 +10,19 @@ using System.Windows.Forms;
 using System.IO;
 
 
+using Velocity = NVelocity.App.Velocity;
+using VelocityContext = NVelocity.VelocityContext;
+using Template = NVelocity.Template;
+using ParseErrorException = NVelocity.Exception.ParseErrorException;
+using ResourceNotFoundException = NVelocity.Exception.ResourceNotFoundException;
+
+
+
+
 using MyTranslate.Model;
 using MyTranslate.DataAccess;
 using MyTranslate.ServiceImpl;
-
+using MyTranslate.Util;
 
 using MyTranslate.App.Common;
 
@@ -60,6 +69,8 @@ namespace MyTranslate.App.UI
         {
             // 初始化下拉列表.
             this.cboBooks.InitBooks();
+
+            this.cboTemplate.InitTemplate();
         }
 
 
@@ -133,35 +144,18 @@ namespace MyTranslate.App.UI
             {
                 // 所有章节，一个文件.
 
-                // 名称优先.
-                Chapter nameChapter = chapterList.FirstOrDefault(p => p.ChapterSubCode == "NAMES");
-
-                if (nameChapter != null)
-                {
-                    AppendOneFile(nameChapter);
-                }
-
-
-
-                // 名称外 按顺序写入.
                 var query =
                     from data in chapterList
                     where
                         data.IsActive
-                        && data.ChapterSubCode != "NAMES"
                     orderby
                         data.ChapterSubCode
                     select data;
 
+                List<Chapter> dataList = query.ToList();
 
-                foreach (Chapter otherChapter in query)
-                {
-                    AppendOneFile(otherChapter);
-                }
-
+                BuildAllFile(dataList);
             }
-
-
 
             MyMessage.Success("导出完毕！");
             
@@ -174,86 +168,148 @@ namespace MyTranslate.App.UI
         /// </summary>
         private void BuildOneFile(Chapter c)
         {
+
+            List<Chapter> chapterList = new List<Chapter>();
+
+            Chapter myChapter = new Chapter();
+            myChapter.BookCode = c.BookCode;
+            myChapter.ChapterCode = c.ChapterCode;
+            myChapter.ChapterName = c.ChapterName;
+            
+
             // 取得行列表.
-            List<Line> mainLineList = lineService.GetChapterLineList(c.ChapterCode);
-
-            string fileName = String.Format("{0}\\{1}.txt", this.txtOutputPath.Text, c.ChapterSubCode);
+            myChapter.Lines = lineService.GetChapterLineList(c.ChapterCode);
 
 
-            using (StreamWriter writer = new StreamWriter(fileName, false, Encoding.UTF8))
+            
+            chapterList.Add(myChapter);
+
+
+            // Velocity 初始化.
+            // 从配置文件读取配置信息.
+            Velocity.Init("nvelocity.properties");
+            // 创建 Velocity Context
+            VelocityContext context = new VelocityContext();
+            // 将列表的数据， 以 ChapterList 作为名称，放入 context.
+            context.Put("ChapterList", chapterList);
+
+
+
+            // 模版.
+            Template template = null;
+
+            string templateFile = this.cboTemplate.Text;
+
+
+            // 尝试加载模版文件.
+            try
             {
-
-                writer.WriteLine("--------------------------------------------------------------------------------");
-                writer.WriteLine("{0} : {1}", c.ChapterCode, c.ChapterName);
-                writer.WriteLine("--------------------------------------------------------------------------------");
-                writer.WriteLine();
-
-                if (c.ChapterSubCode == "NAMES")
-                {
-                    foreach (Line line in mainLineList)
-                    {
-                        writer.WriteLine("{0}  :  {1}", line.SourceText, line.TranslateText);
-                    }
-                }
-                else
-                {
-                    foreach (Line line in mainLineList)
-                    {
-                        writer.WriteLine(line.TranslateText);
-                    }
-                }
-
-                writer.WriteLine();
-                writer.WriteLine();
-                writer.WriteLine();
-
+                template = Velocity.GetTemplate(templateFile);
+            }
+            catch (ResourceNotFoundException)
+            {
+                MyMessage.Fail(String.Format("未能找到模板文件：{0}", templateFile));
+            }
+            catch (ParseErrorException pee)
+            {
+                MyMessage.Fail(String.Format("解析模板文件 {0} 发生了异常！\n{1}", templateFile, pee));
             }
 
+
+            try
+            {
+
+                // 处理模版信息.
+                if (template != null)
+                {
+
+                    string fileName = String.Format("{0}\\{1}.{2}", this.txtOutputPath.Text, c.ChapterSubCode, this.cboTemplate.SelectedFileType);
+
+                    using (StreamWriter sw = new StreamWriter(fileName, false, Encoding.UTF8))
+                    {
+                        template.Merge(context, sw);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MyMessage.Fail(String.Format("根据模板文件 {0} 生成文档的过程中，发生了异常！\n{1}", templateFile, ex));
+            }
         }
 
 
 
 
-        /// <summary>
-        /// 追加一个文件.
-        /// </summary>
-        /// <param name="c"></param>
-        private void AppendOneFile(Chapter c)
+        private void BuildAllFile(List<Chapter> cList)
         {
-            // 取得行列表.
-            List<Line> mainLineList = lineService.GetChapterLineList(c.ChapterCode);
+            List<Chapter> chapterList = new List<Chapter>();
 
-            string fileName = String.Format("{0}\\{1}.txt", this.txtOutputPath.Text, this.bookCode);
+            foreach (var c in cList)
+            {
+                Chapter myChapter = new Chapter();
+                myChapter.BookCode = c.BookCode;
+                myChapter.ChapterCode = c.ChapterCode;
+                myChapter.ChapterName = c.ChapterName;
 
-            using (StreamWriter writer = new StreamWriter(fileName, true, Encoding.UTF8))
+
+                // 取得行列表.
+                myChapter.Lines = lineService.GetChapterLineList(c.ChapterCode);
+
+                chapterList.Add(myChapter);
+            }
+
+            // Velocity 初始化.
+            // 从配置文件读取配置信息.
+            Velocity.Init("nvelocity.properties");
+            // 创建 Velocity Context
+            VelocityContext context = new VelocityContext();
+            // 将列表的数据， 以 ChapterList 作为名称，放入 context.
+            context.Put("ChapterList", chapterList);
+
+
+
+            // 模版.
+            Template template = null;
+
+            string templateFile = this.cboTemplate.Text;
+
+
+            // 尝试加载模版文件.
+            try
+            {
+                template = Velocity.GetTemplate(templateFile);
+            }
+            catch (ResourceNotFoundException)
+            {
+                MyMessage.Fail(String.Format("未能找到模板文件：{0}", templateFile));
+            }
+            catch (ParseErrorException pee)
+            {
+                MyMessage.Fail(String.Format("解析模板文件 {0} 发生了异常！\n{1}", templateFile, pee));
+            }
+
+
+            try
             {
 
-                writer.WriteLine("--------------------------------------------------------------------------------");
-                writer.WriteLine("{0} : {1}", c.ChapterCode, c.ChapterName);
-                writer.WriteLine("--------------------------------------------------------------------------------");
-                writer.WriteLine();
-
-                if (c.ChapterSubCode == "NAMES")
+                // 处理模版信息.
+                if (template != null)
                 {
-                    foreach (Line line in mainLineList)
+
+                    string fileName = String.Format("{0}\\{1}.{2}", this.txtOutputPath.Text, this.cboBooks.SelectedValue, this.cboTemplate.SelectedFileType);
+
+                    using (StreamWriter sw = new StreamWriter(fileName, false, Encoding.UTF8))
                     {
-                        writer.WriteLine("{0}  :  {1}", line.SourceText, line.TranslateText);                    
+                        template.Merge(context, sw);
                     }
                 }
-                else
-                {
-                    foreach (Line line in mainLineList)
-                    {
-                        writer.WriteLine(line.TranslateText);
-                    }
-                }
-
-                writer.WriteLine();
-                writer.WriteLine();
-                writer.WriteLine();
-
+            }
+            catch (Exception ex)
+            {
+                MyMessage.Fail(String.Format("根据模板文件 {0} 生成文档的过程中，发生了异常！\n{1}", templateFile, ex));
             }
         }
+
 
 
     }

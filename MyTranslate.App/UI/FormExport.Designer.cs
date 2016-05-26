@@ -31,28 +31,29 @@
             this.components = new System.ComponentModel.Container();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.gvChapters = new System.Windows.Forms.DataGridView();
+            this.isActiveDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.chapterCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chapterNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chapterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.cboBooks = new MyTranslate.App.UI.ComboBoxBooks();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSelectPath = new System.Windows.Forms.Button();
             this.txtOutputPath = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cboTemplate = new MyTranslate.App.UI.ComboBoxTemplate();
             this.btnExp = new System.Windows.Forms.Button();
             this.rdoAllChapterOneFile = new System.Windows.Forms.RadioButton();
             this.rdoOneChapterOneFile = new System.Windows.Forms.RadioButton();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.chapterBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.cboBooks = new MyTranslate.App.UI.ComboBoxBooks();
-            this.isActiveDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.chapterCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chapterNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvChapters)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chapterBindingSource)).BeginInit();
             this.pnlHeader.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chapterBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -92,6 +93,31 @@
             this.gvChapters.Size = new System.Drawing.Size(978, 432);
             this.gvChapters.TabIndex = 3;
             // 
+            // isActiveDataGridViewCheckBoxColumn
+            // 
+            this.isActiveDataGridViewCheckBoxColumn.DataPropertyName = "IsActive";
+            this.isActiveDataGridViewCheckBoxColumn.HeaderText = "选择";
+            this.isActiveDataGridViewCheckBoxColumn.Name = "isActiveDataGridViewCheckBoxColumn";
+            // 
+            // chapterCodeDataGridViewTextBoxColumn
+            // 
+            this.chapterCodeDataGridViewTextBoxColumn.DataPropertyName = "ChapterCode";
+            this.chapterCodeDataGridViewTextBoxColumn.HeaderText = "ChapterCode";
+            this.chapterCodeDataGridViewTextBoxColumn.Name = "chapterCodeDataGridViewTextBoxColumn";
+            this.chapterCodeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // chapterNameDataGridViewTextBoxColumn
+            // 
+            this.chapterNameDataGridViewTextBoxColumn.DataPropertyName = "ChapterName";
+            this.chapterNameDataGridViewTextBoxColumn.HeaderText = "ChapterName";
+            this.chapterNameDataGridViewTextBoxColumn.Name = "chapterNameDataGridViewTextBoxColumn";
+            this.chapterNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.chapterNameDataGridViewTextBoxColumn.Width = 300;
+            // 
+            // chapterBindingSource
+            // 
+            this.chapterBindingSource.DataSource = typeof(MyTranslate.Model.Chapter);
+            // 
             // pnlHeader
             // 
             this.pnlHeader.Controls.Add(this.label1);
@@ -110,6 +136,17 @@
             this.label1.Size = new System.Drawing.Size(35, 12);
             this.label1.TabIndex = 3;
             this.label1.Text = "Books";
+            // 
+            // cboBooks
+            // 
+            this.cboBooks.DisplayMember = "BookName";
+            this.cboBooks.FormattingEnabled = true;
+            this.cboBooks.Location = new System.Drawing.Point(85, 13);
+            this.cboBooks.Name = "cboBooks";
+            this.cboBooks.Size = new System.Drawing.Size(186, 20);
+            this.cboBooks.TabIndex = 2;
+            this.cboBooks.ValueMember = "BookCode";
+            this.cboBooks.SelectedIndexChanged += new System.EventHandler(this.cboBooks_SelectedIndexChanged);
             // 
             // panel1
             // 
@@ -150,6 +187,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.cboTemplate);
             this.panel2.Controls.Add(this.btnExp);
             this.panel2.Controls.Add(this.rdoAllChapterOneFile);
             this.panel2.Controls.Add(this.rdoOneChapterOneFile);
@@ -158,6 +196,15 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(863, 44);
             this.panel2.TabIndex = 4;
+            // 
+            // cboTemplate
+            // 
+            this.cboTemplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTemplate.FormattingEnabled = true;
+            this.cboTemplate.Location = new System.Drawing.Point(387, 11);
+            this.cboTemplate.Name = "cboTemplate";
+            this.cboTemplate.Size = new System.Drawing.Size(286, 20);
+            this.cboTemplate.TabIndex = 3;
             // 
             // btnExp
             // 
@@ -195,42 +242,6 @@
             // 
             this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyDocuments;
             // 
-            // chapterBindingSource
-            // 
-            this.chapterBindingSource.DataSource = typeof(MyTranslate.Model.Chapter);
-            // 
-            // cboBooks
-            // 
-            this.cboBooks.DisplayMember = "BookName";
-            this.cboBooks.FormattingEnabled = true;
-            this.cboBooks.Location = new System.Drawing.Point(85, 13);
-            this.cboBooks.Name = "cboBooks";
-            this.cboBooks.Size = new System.Drawing.Size(186, 20);
-            this.cboBooks.TabIndex = 2;
-            this.cboBooks.ValueMember = "BookCode";
-            this.cboBooks.SelectedIndexChanged += new System.EventHandler(this.cboBooks_SelectedIndexChanged);
-            // 
-            // isActiveDataGridViewCheckBoxColumn
-            // 
-            this.isActiveDataGridViewCheckBoxColumn.DataPropertyName = "IsActive";
-            this.isActiveDataGridViewCheckBoxColumn.HeaderText = "选择";
-            this.isActiveDataGridViewCheckBoxColumn.Name = "isActiveDataGridViewCheckBoxColumn";
-            // 
-            // chapterCodeDataGridViewTextBoxColumn
-            // 
-            this.chapterCodeDataGridViewTextBoxColumn.DataPropertyName = "ChapterCode";
-            this.chapterCodeDataGridViewTextBoxColumn.HeaderText = "ChapterCode";
-            this.chapterCodeDataGridViewTextBoxColumn.Name = "chapterCodeDataGridViewTextBoxColumn";
-            this.chapterCodeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // chapterNameDataGridViewTextBoxColumn
-            // 
-            this.chapterNameDataGridViewTextBoxColumn.DataPropertyName = "ChapterName";
-            this.chapterNameDataGridViewTextBoxColumn.HeaderText = "ChapterName";
-            this.chapterNameDataGridViewTextBoxColumn.Name = "chapterNameDataGridViewTextBoxColumn";
-            this.chapterNameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.chapterNameDataGridViewTextBoxColumn.Width = 300;
-            // 
             // FormExport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -242,13 +253,13 @@
             this.Load += new System.EventHandler(this.FormExport_Load);
             this.tlpMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvChapters)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chapterBindingSource)).EndInit();
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chapterBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -273,5 +284,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn isActiveDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn chapterCodeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn chapterNameDataGridViewTextBoxColumn;
+        private ComboBoxTemplate cboTemplate;
     }
 }

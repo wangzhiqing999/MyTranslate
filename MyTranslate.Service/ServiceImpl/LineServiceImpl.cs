@@ -37,7 +37,26 @@ namespace MyTranslate.ServiceImpl
                         data;
 
 
-                return query.ToList();
+
+                List<Line> resultList = query.ToList();
+
+                // 为 Null 的数据， 变更为字符.
+                foreach (var oneResult in resultList)
+                {
+
+                    if (oneResult.MachineText == null)
+                    {
+                        oneResult.MachineText = String.Empty;
+                    }
+                    if (oneResult.TranslateText == null)
+                    {
+                        oneResult.TranslateText = String.Empty;
+                    }
+
+                }
+
+
+                return resultList;
 
             }
         }

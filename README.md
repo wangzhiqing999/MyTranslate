@@ -48,3 +48,6 @@ LINQ to Entities 查询结果，好像直接拿去 XML Serialization 的时候�
 
 
 
+### NVelocity
+
+主要用于 将数据, 以模板的方式, 导出为结果文本.

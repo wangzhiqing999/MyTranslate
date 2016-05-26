@@ -264,6 +264,30 @@ namespace MyTranslate.App.UI
 
 
 
+        /// <summary>
+        /// 全选.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void chkSelectAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (webChapterList == null)
+            {
+                return;
+            }
+
+            foreach (var item in webChapterList)
+            {
+                item.IsActive = true;
+            }
+
+            this.gvWebChapters.DataSource = null;
+            this.gvWebChapters.DataSource = webChapterList;
+
+        }
+
+
+
 
 
     }

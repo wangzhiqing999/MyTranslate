@@ -1,0 +1,9 @@
+#foreach( $c in $ChapterList )
+--------------------------------------------------------------------------------
+$c.ChapterCode   $c.ChapterTranslateName
+--------------------------------------------------------------------------------
+
+#foreach( $l in $c.Lines )
+$l.TranslateText
+#end
+#end
