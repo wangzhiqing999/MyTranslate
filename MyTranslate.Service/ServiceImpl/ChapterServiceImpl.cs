@@ -533,6 +533,62 @@ namespace MyTranslate.ServiceImpl
 
 
 
+
+        /// <summary>
+        /// 删除章节.
+        /// </summary>
+        /// <param name="chapter"></param>
+        /// <returns></returns>
+        public bool Delete(Chapter chapter)
+        {
+
+            if (chapter.ChapterCode.Contains("NAMES"))
+            {
+                ResultMessage = "命名章节不能删除";
+                return false;
+            }
+
+            try
+            {
+                using (MyTranslateContext context = new MyTranslateContext())
+                {
+                    // 先判断 数据是否存在.
+
+                    Chapter dbChapter = context.Chapters.Include("Lines").FirstOrDefault(p => p.ChapterCode == chapter.ChapterCode);
+
+                    if (dbChapter == null)
+                    {
+                        // 数据 不存在.
+                        ResultMessage = String.Format("未能检索到代码为 {0} 的章节", chapter.ChapterCode);
+                        return false;
+                       
+                    }
+                    else
+                    {
+                        // 删除逻辑.
+
+                        // 首先删除该章节下面的 行.                        
+                        context.Lines.RemoveRange(dbChapter.Lines);
+                                                
+                        // 删除章节.
+                        context.Chapters.Remove(dbChapter);
+                    }
+
+                    // 物理保存.
+                    context.SaveChanges();
+
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ResultMessage = ex.Message;
+
+                return false;
+            }
+        }
+
     }
 
 }

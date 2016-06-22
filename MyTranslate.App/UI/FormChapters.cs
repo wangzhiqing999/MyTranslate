@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using MyTranslate.Model;
 using MyTranslate.ServiceImpl;
 
+using MyTranslate.App.Common;
 
 
 namespace MyTranslate.App.UI
@@ -116,6 +117,75 @@ namespace MyTranslate.App.UI
             }
 
         }
+
+
+
+
+
+
+        /// <summary>
+        /// 单击鼠标右键时鼠标的位置
+        /// </summary>
+        private Point startPosition;  
+
+
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            // 保存鼠标当前位置.
+            startPosition = Cursor.Position;
+        }
+
+
+        /// <summary>
+        /// 删除章节.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void deleteChapterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridView.HitTestInfo hitinfo;
+            Point point = gvChapters.PointToClient(startPosition); //坐标转换
+            hitinfo = gvChapters.HitTest(point.X, point.Y);
+
+            // 取得行号.
+            int rowIndex = hitinfo.RowIndex;
+
+
+
+            if (rowIndex < 0)
+            {
+                // 忽略为 负数的行号.
+                return;
+            }
+
+
+            // 取得指定行的数据.
+            Chapter currentChapter = mainChapterList[rowIndex];
+
+
+            string msg = String.Format("确认要删除 {0} {1} 章节的数据么？ \r\n注意！ 此操作不可恢复！", currentChapter.ChapterCode, currentChapter.ChapterName);
+
+            if (!MyMessage.Makesure(msg))
+            {
+                return;
+            }
+
+
+            bool result = chapterService.Delete(currentChapter);
+
+            if (!result)
+            {
+                MyMessage.Fail("删除处理失败了， 原因：" + chapterService.ResultMessage);
+                return;
+            }
+            
+
+            // 删除成功， 刷新数据.
+            ReloadChapterData();
+        }
+
+
 
 
 

@@ -31,11 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.gvChapters = new System.Windows.Forms.DataGridView();
-            this.chapterBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.pnlHeader = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cboBooks = new MyTranslate.App.UI.ComboBoxBooks();
             this.chapterCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chapterNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ChapterTranslateName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,10 +41,18 @@
             this.createTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastUpdateUserDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastUpdateTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chapterBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.pnlHeader = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteChapterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cboBooks = new MyTranslate.App.UI.ComboBoxBooks();
             this.tlpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvChapters)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chapterBindingSource)).BeginInit();
             this.pnlHeader.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -84,6 +87,7 @@
             this.createTimeDataGridViewTextBoxColumn,
             this.lastUpdateUserDataGridViewTextBoxColumn,
             this.lastUpdateTimeDataGridViewTextBoxColumn});
+            this.gvChapters.ContextMenuStrip = this.contextMenuStrip1;
             this.gvChapters.DataSource = this.chapterBindingSource;
             this.gvChapters.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvChapters.Location = new System.Drawing.Point(3, 53);
@@ -93,50 +97,6 @@
             this.gvChapters.Size = new System.Drawing.Size(841, 440);
             this.gvChapters.TabIndex = 0;
             this.gvChapters.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gvChapters_CellMouseDoubleClick);
-            // 
-            // chapterBindingSource
-            // 
-            this.chapterBindingSource.DataSource = typeof(MyTranslate.Model.Chapter);
-            // 
-            // pnlHeader
-            // 
-            this.pnlHeader.Controls.Add(this.label2);
-            this.pnlHeader.Controls.Add(this.label1);
-            this.pnlHeader.Controls.Add(this.cboBooks);
-            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlHeader.Location = new System.Drawing.Point(3, 3);
-            this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(752, 44);
-            this.pnlHeader.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(293, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(137, 12);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "双击单元格，进行编辑。";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 12);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Books";
-            // 
-            // cboBooks
-            // 
-            this.cboBooks.DisplayMember = "BookName";
-            this.cboBooks.FormattingEnabled = true;
-            this.cboBooks.Location = new System.Drawing.Point(93, 13);
-            this.cboBooks.Name = "cboBooks";
-            this.cboBooks.Size = new System.Drawing.Size(162, 20);
-            this.cboBooks.TabIndex = 0;
-            this.cboBooks.ValueMember = "BookCode";
-            this.cboBooks.SelectedIndexChanged += new System.EventHandler(this.cboBooks_SelectedIndexChanged);
             // 
             // chapterCodeDataGridViewTextBoxColumn
             // 
@@ -216,6 +176,65 @@
             this.lastUpdateTimeDataGridViewTextBoxColumn.ReadOnly = true;
             this.lastUpdateTimeDataGridViewTextBoxColumn.Visible = false;
             // 
+            // chapterBindingSource
+            // 
+            this.chapterBindingSource.DataSource = typeof(MyTranslate.Model.Chapter);
+            // 
+            // pnlHeader
+            // 
+            this.pnlHeader.Controls.Add(this.label2);
+            this.pnlHeader.Controls.Add(this.label1);
+            this.pnlHeader.Controls.Add(this.cboBooks);
+            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlHeader.Location = new System.Drawing.Point(3, 3);
+            this.pnlHeader.Name = "pnlHeader";
+            this.pnlHeader.Size = new System.Drawing.Size(752, 44);
+            this.pnlHeader.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(293, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(317, 12);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "双击单元格，进行编辑。  鼠标右键，弹出菜单进行删除！";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(34, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 12);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Books";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteChapterToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 26);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // deleteChapterToolStripMenuItem
+            // 
+            this.deleteChapterToolStripMenuItem.Name = "deleteChapterToolStripMenuItem";
+            this.deleteChapterToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.deleteChapterToolStripMenuItem.Text = "删除章节";
+            this.deleteChapterToolStripMenuItem.Click += new System.EventHandler(this.deleteChapterToolStripMenuItem_Click);
+            // 
+            // cboBooks
+            // 
+            this.cboBooks.DisplayMember = "BookName";
+            this.cboBooks.FormattingEnabled = true;
+            this.cboBooks.Location = new System.Drawing.Point(93, 13);
+            this.cboBooks.Name = "cboBooks";
+            this.cboBooks.Size = new System.Drawing.Size(162, 20);
+            this.cboBooks.TabIndex = 0;
+            this.cboBooks.ValueMember = "BookCode";
+            this.cboBooks.SelectedIndexChanged += new System.EventHandler(this.cboBooks_SelectedIndexChanged);
+            // 
             // FormChapters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -230,6 +249,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chapterBindingSource)).EndInit();
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -253,5 +273,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn createTimeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdateUserDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdateTimeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem deleteChapterToolStripMenuItem;
     }
 }

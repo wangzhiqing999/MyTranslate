@@ -85,6 +85,18 @@ namespace MyTranslate.Service
         bool InsertOrUpdate(Chapter chapter);
 
 
+
+
+
+        /// <summary>
+        /// 删除章节.
+        /// </summary>
+        /// <param name="chapter"></param>
+        /// <returns></returns>
+        bool Delete(Chapter chapter);
+
+
+
     }
 
 }
